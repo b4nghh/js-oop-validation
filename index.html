@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="js/validator.js"></script>	
+    <script>
+        function validateForm() { 
+            var noError = true;
+            var email = document.getElementById('email');   
+            var emailError = document.getElementById('error_email');
+            var validatorEmail = new validateAll(email, emailError,'');
+
+            validatorEmail.messageErr = "Email field is required.";
+            if(!validatorEmail.checkEmpty()) {
+                validatorEmail.messageErr = "Invalid email.";
+                if(!validatorEmail.checkEmail()) {
+                    noError = false;
+                }
+            }
+            else {
+                noError = false;
+            }
+
+            var password = document.getElementById('password');
+            var passwordError = document.getElementById('error_password');
+            var validatorPassword = new validateAll(password, passwordError, '');
+            validatorPassword.messageErr = "Password field is required.";
+            if(validatorPassword.checkEmpty()) {
+                noError = false;
+            }
+
+            var number = document.getElementById('number');
+            var numberError = document.getElementById('error_number');
+            var validatorNumber = new validateAll(number, numberError, '');
+            validatorNumber.messageErr = "Number field is required.";
+            if(!validatorNumber.checkEmpty()) {
+                validatorNumber.messageErr = "Invalid number.";
+                if(!validatorNumber.isNumber()) {
+                    noError = false;
+                }
+            }
+            else {
+                noError = false;
+            }
+
+            var date = document.getElementById('date');
+            var dateError = document.getElementById('error_date');
+            var validatorDate = new validateAll(date, dateError,'');
+            validatorDate.messageErr = "Date field is required.";
+            if(!validatorDate.checkEmpty()){
+                validatorDate.messageErr = "Invalid date.";
+                if(!validatorDate.isDate()) {
+                    noError = false;
+                }                
+            }    
+            else {
+                noError = false;
+            }  
+
+            var min = document.getElementById('min');
+            var minError = document.getElementById('error_min');
+            var validatorMin = new validateAll(min, minError,'');
+            validatorMin.messageErr = "Minimum Length field is required.";
+            if(!validatorMin.checkEmpty()){
+                validatorMin.messageErr = "Minimum Length must more than 5 charaters.";
+                if(!validatorMin.minLen(5)) {
+                    noError = false;
+                }                
+            }    
+            else {
+                noError = false;
+            }
+
+            var max = document.getElementById('max');
+            var maxError = document.getElementById('error_max');
+            var validatorMax = new validateAll(max, maxError,'');
+            validatorMax.messageErr = "Maximum Length field is required.";
+            if(!validatorMax.checkEmpty()){
+                validatorMax.messageErr = "Minimum Length must less than 10 charaters.";
+                if(!validatorMax.maxLen(10)) {
+                    noError = false;
+                }                
+            }    
+            else {
+                noError = false;
+            }
+
+            var between = document.getElementById('between');
+            var betweenError = document.getElementById('error_between');
+            var validatorBetween = new validateAll(between, betweenError,'');
+            validatorBetween.messageErr = "Between Length field is required.";
+            if(!validatorBetween.checkEmpty()){
+                validatorBetween.messageErr = "Between Length must more than 5 characters and less than 10 charaters.";
+                if(!validatorBetween.minToMax(5,10)) {
+                    noError = false;
+                }                
+            }    
+            else {
+                noError = false;
+            }
+
+            // alert(noError);
+            return noError;           
+        }
+    </script>
+</head>
+<body>
+<div id="MainArea">
+<div class="login"> 	
+	<form action="" name="loginform" id="UserLoginForm" method="post" accept-charset="utf-8"  onsubmit="return validateForm();">
+	<div style="display:none;">
+	<input type="hidden" name="_method" value="POST"/></div>    
+     <div class="user">
+   		 <label for="login_id" class="label">Email</label>
+    		<br>
+   		 <input id="email"  class="textbox" type="text" value="" autocomplete="off" size="36" name="email">
+         <div id="error_email" class="errormess" style="color: red;"></div>
+    </div>
+    <div class="pass">
+        <label for="password" class="label">Password</label>
+        <br>
+        <input id="password" class="textbox" type="password" value="" autocomplete="off" size="36" name="password">
+        <span id="error_password" class="errormess" style="color: red;"></span>
+    </div>   
+    <!-- new part -->
+    <div class="user">
+         <label for="date" class="label">Date</label>
+            <br>
+         <input id="date"  class="textbox" type="text" value="" autocomplete="off" size="36" name="date" placeholder="mm/dd/yyyy">
+         <div id="error_date" class="errormess" style="color: red;"></div>
+    </div>
+    <div class="user">
+         <label for="number" class="label">Number</label>
+            <br>
+         <input id="number"  class="textbox" type="text" value="" autocomplete="off" size="36" name="number">
+         <div id="error_number" class="errormess" style="color: red;"></div>
+    </div>
+    <div class="user">
+         <label for="min" class="label">Minimum Length</label>
+            <br>
+         <input id="min"  class="textbox" type="text" value="" autocomplete="off" size="36" name="min">
+         <div id="error_min" class="errormess" style="color: red;"></div>
+    </div>
+    <div class="user">
+         <label for="max" class="label">Maximum Length</label>
+            <br>
+         <input id="max"  class="textbox" type="text" value="" autocomplete="off" size="36" name="max">
+         <div id="error_max" class="errormess" style="color: red;"></div>
+    </div>
+    <div class="user">
+         <label for="between" class="label">Between Length</label>
+            <br>
+         <input id="between"  class="textbox" type="text" value="" autocomplete="off" size="36" name="between">
+         <div id="error_between" class="errormess" style="color: red;"></div>
+    </div>
+ 	<div class="btn_login">
+        <input type="submit" id="submit" value="Submit" name="login" class="submitlogin">
+    </div>
+	</form>
+
+</div>
+</div>
+</body>
+</html>
